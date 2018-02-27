@@ -1,8 +1,8 @@
 Shipyard简介
 Shipyard是一个集成管理docker容器、镜像、Registries的系统，它具有以下特点：
-支持多节点的集成管理
-可动态加载节点
-可托管node下的容器
+1、支持多节点的集成管理
+2、可动态加载节点
+3、可托管node下的容器
 
 环境准备（CentOS 6.7）
 下载镜像
@@ -16,18 +16,18 @@ Shipyard是一个集成管理docker容器、镜像、Registries的系统，它�
 1.下载自动部署Shell脚本
 #curl -sSL https://shipyard-project.com/deploy | bash -s
 自动部署脚本中， 包括以下参数：
-ACTION： 表示可以使用的指令，它包括以下选项。
-deploy， 默认值， 表示自动安装部署Shipyard管理工具及相关应用
-upgrade，更新已存在的实例（注意：你要保持相同的系统环境、变量来部署同样的配置）
-node， 部署Swarm的一个新节点
-remove， 已存在的shipyard实例
-DISCOVERY: 集群系统采用Swarm进行采集和管理(在节点管理中可以使用‘node’)
-IMAGE: 镜像，默认使用shipyard的镜像
-PREFIX: 容器名字的前缀
-SHIPYARD_ARGS: 容器的常用参数
-TLS_CERT_PATH: TLS证书路径
-PORT: 主程序监听端口 (默认端口: 8080)
-PROXY_PORT: 代理端口 (默认: 2375)
+ACTION： 表示可以使用的指令，它包括以下选项。
+deploy， 默认值， 表示自动安装部署Shipyard管理工具及相关应用
+upgrade，更新已存在的实例（注意：你要保持相同的系统环境、变量来部署同样的配置）
+node， 部署Swarm的一个新节点
+remove， 已存在的shipyard实例
+DISCOVERY: 集群系统采用Swarm进行采集和管理(在节点管理中可以使用‘node’)
+IMAGE: 镜像，默认使用shipyard的镜像
+PREFIX: 容器名字的前缀
+SHIPYARD_ARGS: 容器的常用参数
+TLS_CERT_PATH: TLS证书路径
+PORT: 主程序监听端口 (默认端口: 8080)
+PROXY_PORT: 代理端口 (默认: 2375)
 2.使用镜像
 Shipyard允许您采取指定的镜像来部署实例，比如以下的测试版本，你也已这样做：
 #curl -sSL https://shipyard-project.com/deploy | IMAGE=shipyard/shipyard:test bash -s
@@ -39,11 +39,11 @@ Shipyard允许您采取指定的镜像来部署实例，比如以下的测试版
 #curl -sSL https://shipyard-project.com/deploy | SHIPYARD_ARGS="--ldap-server=ldap.example.com --ldap-autocreate-users" bash -s
 5.使用安全认证(TLS证书)
 启用安全加密通讯协议（TLS）对Shipyard进行部署，包括代理（docker-proxy）、swarm集群、shipyard管理平台的配置，这是一个配置规范。证书必须采用以下命名规范：
-ca.pem: 安全认证证书
-server.pem: 服务器证书
-server-key.pem: 服务器私有证书
-cert.pem: 客户端证书
-key.pem: 客户端证书的key
+ca.pem: 安全认证证书
+server.pem: 服务器证书
+server-key.pem: 服务器私有证书
+cert.pem: 客户端证书
+key.pem: 客户端证书的key
 注意：证书将被放置在一个单独的安全认证docker容器中，并在各个组成部分之间共享。如果需要调试，可以将此容器连接到调试容器。数据容器名称为$PREFIX-certs。
 #docker run --rm \ 
    -v $(pwd)/certs:/certs \    ehazlett/certm \ -d /certs \ 

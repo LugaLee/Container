@@ -39,18 +39,19 @@ EXPOSE 8080 8888
 5、查看服务状态
 
 [root@monitor:/home/mongoadmin/tomcat]# docker ps
-CONTAINER ID        IMAGE                                        COMMAND                  CREATED             STATUS              PORTS                                                                    NAMES
-b003ec30b882        docker-registry.xwf-id.com/xwf/tomcat-test   "catalina.sh run"        21 minutes ago      Up 21 minutes       0.0.0.0:8888->8888/tcp, 0.0.0.0:8088->8080/tcp                           tomcat-test
+CONTAINER ID        IMAGE                                        COMMAND              CREATED             STATUS          PORTS                                           NAMES
+b003ec30b882        docker-registry.xwf-id.com/xwf/tomcat-test   "catalina.sh run"    21 minutes ago      Up 21 minutes   0.0.0.0:8888->8888/tcp, 0.0.0.0:8088->8080/tcp  tomcat-test
 ------表明容器已正常启动，若检测其是否正常运行，可通过以下命令以及日志进行验证：
 
 [root@monitor:/home/mongoadmin/tomcat]# docker exec -it b003ec30b882 /bin/bash
 
 [root@b003ec30b882:/usr/local/tomcat]# ps -ef|grep java
-root         1     0  1 02:17 ?        00:00:15 /docker-java-home/jre/bin/java -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager 
--Djdk.tls.ephemeralDHKeySize=2048 -Xms1024M -Xmx1024M -Xmn384M -Xss512K -XX:PermSize=128m -XX:MaxPermSize=128m -XX:SurvivorRatio=8 -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/usr/local/tomcat/logs/gc.log -XX:+D
-isableExplicitGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/usr/local/tomcat/logs/ -Djava.rmi.server.hostname=10.1.22.35 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8888 -Dcom.sun.manageme
-nt.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.rmi.port=8888 -Dignore.endorsed.dirs= -classpath /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-
-juli.jar -Dcatalina.base=/usr/local/tomcat -Dcatalina.home=/usr/local/tomcat -Djava.io.tmpdir=/usr/local/tomcat/temp org.apache.catalina.startup.Bootstrap start
+root         1     0  1 02:17 ?        00:00:15 /docker-java-home/jre/bin/java -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties -Djava.util.logging.manager=org.
+apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Xms1024M -Xmx1024M -Xmn384M -Xss512K -XX:PermSize=128m -XX:MaxPermSize=128m -XX:SurvivorRatio=8 -XX:+PrintGCDetails 
+-XX:+PrintGCDateStamps -Xloggc:/usr/local/tomcat/logs/gc.log -XX:+DisableExplicitGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/usr/local/tomcat/logs/ -Djava.rmi.server.hostname=
+10.1.22.35 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8888 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.
+management.jmxremote.rmi.port=8888 -Dignore.endorsed.dirs= -classpath /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar -Dcatalina.base=/usr/local/tomcat -Dcata
+lina.home=/usr/local/tomcat -Djava.io.tmpdir=/usr/local/tomcat/temp org.apache.catalina.startup.Bootstrap start
 root        75    61  0 02:43 ?        00:00:00 grep java
 
 [root@b003ec30b882:/usr/local/tomcat/logs]# ls -l

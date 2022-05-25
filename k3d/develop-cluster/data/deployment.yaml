@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book
+  labels:
+    app: book
+spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: book-pod
+    template:
+      metadata:
+        labels:
+          app: book-pod
+      spec:
+        containers:
+        - name: book
+          image: k3d-book-registry:5000/book-testdata:local
+          ports:
+          - containerPort: 3000
